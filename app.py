@@ -28,8 +28,10 @@ def resource_path(relative_path):
 
 def get_input_path():
     """ Get path for input file """
-    path = tk.filedialog.askopenfilename(title="Selecione o arquivo de entrada",
-                                         filetypes=(("Arquivos de PDF", "*.pdf"), ("Todos os tipos", "*.*")))
+    path = tk.filedialog.askopenfilename(
+        title="Selecione o arquivo de entrada",
+        filetypes=(("Arquivos de PDF", "*.pdf"), ("Todos os tipos", "*.*"))
+    )
     
     err = verify_file(path, True)
     
@@ -45,8 +47,11 @@ def get_input_path():
 
 def get_output_path():
     """ Get path for output file """
-    path = tk.filedialog.asksaveasfilename(title="Salvar como... ",
-                                           filetypes=[("Arquivos de PDF", ".pdf")], defaultextension='.pdf')
+    path = tk.filedialog.asksaveasfilename(
+        title="Salvar como... ",
+        filetypes=[("Arquivos de PDF", ".pdf")], 
+        defaultextension='.pdf'
+    )
 
     err = verify_file(path)
 
@@ -115,7 +120,12 @@ def compress():
 root = tk.Tk()
 root.title("Compressor de PDFs")
 root.resizable(False, False)
-root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file=resource_path('icon.png')))
+root.tk.call(
+    'wm', 
+    'iconphoto', 
+    root._w, 
+    tk.PhotoImage(file=resource_path('icon.png'))
+)
 
 
 # icon for buttons
@@ -123,8 +133,15 @@ folder_icon = tk.PhotoImage(file=resource_path('folder_open.png'))
 
 
 # frames
-files_frame = tk.LabelFrame(root, text="Selecione os arquivos: ", padx=10, pady=10)
-compress_frame = tk.LabelFrame(root, text="Selecione a qualidade: ", padx=96, pady=10)
+files_frame = tk.LabelFrame(
+    root, 
+    text="Selecione os arquivos: ", 
+    padx=10, pady=10
+)
+compress_frame = tk.LabelFrame(
+    root, text="Selecione a qualidade: ", 
+    padx=96, pady=10
+)
 # packing
 files_frame.pack(padx=50, pady=25)
 compress_frame.pack(padx=50, pady=25)
@@ -147,9 +164,26 @@ output_entry.grid(row=1, column=1)
 
 
 # buttons
-input_button = tk.Button(files_frame, image=folder_icon, command=get_input_path, width=20, height=20, bg='white')
-output_button = tk.Button(files_frame, image=folder_icon, command=get_output_path, width=20, height=20, bg='white')
-compress_button = tk.Button(root, text="Comprimir", command=compress, bg="green")
+input_button = tk.Button(
+    files_frame, 
+    image=folder_icon, 
+    command=get_input_path, 
+    width=20, height=20, 
+    bg='white'
+)
+output_button = tk.Button(
+    files_frame, 
+    image=folder_icon, 
+    command=get_output_path, 
+    width=20, height=20, 
+    bg='white'
+)
+compress_button = tk.Button(
+    root, 
+    text="Comprimir", 
+    command=compress, 
+    bg='green'
+)
 # packing
 input_button.grid(row=0, column=3, padx=5, pady=2.5)
 output_button.grid(row=1, column=3, padx=5, pady=2.5)
@@ -160,7 +194,12 @@ compress_button.pack(pady=25, anchor='center')
 compress_type = tk.StringVar()
 compress_type.set("screen")
 for text, value in MODES:
-    tk.Radiobutton(compress_frame, text=text, variable=compress_type, value=value).grid(sticky='w')
+    tk.Radiobutton(
+        compress_frame, 
+        text=text, 
+        variable=compress_type, 
+        value=value
+    ).grid(sticky='w')
 
 
 root.mainloop()
