@@ -57,20 +57,17 @@ def get_output_path():
         messagebox.showerror("Erro ao selecionar o arquivo de saída", err)
 
 
-def verify_file(file, input_file=False):
+def verify_file(path, input_file=False):
     """ Verify if file exists and is a pdf """
-    if file:
+    if path:
         if input_file:
-            try:
-                with open(file, 'r'):
-                    pass
-            except FileNotFoundError:
+           if not os.path.exists(path):
                 return "Arquivo de entrada inexistente"
-        if '.pdf' in file:
+        if '.pdf' in path:
             return None
         else:
             return "Escolha um arquivo no formato PDF"
-    elif not file and input_file:
+    elif not path and input_file:
         return "Selecione o arquivo de entrada"
     else:
         return "Selecione o arquivo de saída"
